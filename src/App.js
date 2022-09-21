@@ -1,25 +1,84 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
 
-function App() {
+function HomePage() {
+  return <p>This is Homepage</p>;
+}
+
+function AboutPage() {
+  return <p>This is About page</p>;
+}
+
+function FAQPage() {
+  return <p>This is FAQ page</p>;
+}
+
+function Link({ target, navigate, children }) {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <a
+      href={target}
+      onClick={(event) => {
+        event.preventDefault(); // menghapus behavior default
+        navigate(target); // mengubah state berdasarkan target
+      }}
+    >
+      {children}
+    </a>
   );
+}
+
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+
+    // inisialisasi state
+    this.state = {
+      page: '/'
+    };
+
+    this.navigate = this.navigate.bind(this);
+  }
+
+  navigate(target) {
+    this.setState(() => {
+      return {
+        page: target
+      };
+    });
+  }
+
+  render() {
+    return (
+      <>
+        <header>
+          <nav>
+            <ul>
+              <li>
+                <Link target="/" navigate={this.navigate}>
+                  Home
+                </Link>
+              </li>
+              <li>
+                <Link target="/about" navigate={this.navigate}>
+                  About
+                </Link>
+              </li>
+              <li>
+                <Link target="/faq" navigate={this.navigate}>
+                  FAQ
+                </Link>
+              </li>
+            </ul>
+          </nav>
+        </header>
+        <main>
+          {this.state.page === '/' && <HomePage />}
+          {this.state.page === '/about' && <AboutPage />}
+          {this.state.page === '/faq' && <FAQPage />}
+        </main>
+      </>
+    );
+  }
+
 }
 
 export default App;
