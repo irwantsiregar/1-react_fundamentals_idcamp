@@ -1,32 +1,28 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
-import Todo from './components/Todo';
-import ToggleLampFunc from './components/ToggleLamp';
 
-import './styles/style.css';
+function Counter() {
+  const [count, setCount] = React.useState(0);
 
-function App() {
+  // menggantikan componentDidMount dan componentDidUpdate
+  React.useEffect(() => {
+    console.count('di dalam useEffect');
+    document.title = `You have clicked ${count}x`;
+  });
+
+  const increase = () => setCount((prevCount) => prevCount + 1);
+  const decrease = () => setCount((prevCount) => prevCount - 1);
+
+  console.count('rendering');
+
   return (
     <>
-      <h1>
-        Latihan <code>useState()</code>
-      </h1>
-      <section>
-        <h2>
-          Kasus 1: <code>ToggleLamp</code> Component
-        </h2>
-        <p>Nyalakan lampu untuk melihat pesan.</p>
-        <ToggleLampFunc />
-      </section>
-      <section>
-        <h2>
-          Kasus 2: <code>Todo</code> Component
-        </h2>
-        <Todo />
-      </section>
+      <button onClick={increase}>increase</button>
+      <p>Count: {count}</p>
+      <button onClick={decrease}>decrease</button>
     </>
   );
 }
 
 const root = createRoot(document.getElementById('root'));
-root.render(<App />);
+root.render(<Counter />);
