@@ -1,49 +1,32 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
-import { BrowserRouter, Link, Routes, Route } from 'react-router-dom'
+import Todo from './components/Todo';
+import ToggleLamp from './components/ToggleLamp';
 
-function HomePage() {
-  return <p>This is Homepage</p>;
-}
-
-function AboutPage() {
-  return <p>This is About page</p>;
-}
-
-function FAQPage() {
-  return <p>This is FAQ page</p>;
-}
+import './styles/style.css';
 
 function App() {
   return (
     <>
-      <header>
-        <ul>
-          <li>
-            <Link to="/">Home</Link>
-          </li>
-          <li>
-            <Link to="/about">About</Link>
-          </li>
-          <li>
-            <Link to="/faq">Faq</Link>
-          </li>
-        </ul>
-      </header>
-      <main>
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/about" element={<AboutPage />} />
-          <Route path="/faq" element={<FAQPage />} />
-        </Routes>
-      </main>
+      <h1>
+        Latihan <code>useState()</code>
+      </h1>
+      <section>
+        <h2>
+          Kasus 1: <code>ToggleLamp</code> Component
+        </h2>
+        <p>Nyalakan lampu untuk melihat pesan.</p>
+        <ToggleLamp />
+      </section>
+      <section>
+        <h2>
+          Kasus 2: <code>Todo</code> Component
+        </h2>
+        <Todo />
+      </section>
     </>
   );
 }
 
 const root = createRoot(document.getElementById('root'));
-root.render(
-  <BrowserRouter>
-    <App />
-  </BrowserRouter>
-);
+root.render(<App />);
