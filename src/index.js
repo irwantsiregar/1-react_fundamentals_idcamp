@@ -1,31 +1,65 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
-
-async function getGitHubProfile(username) {
-  const response = await fetch(`https://api.github.com/users/${username}`);
-  return response.json();
-}
+import { subscribeGitHubProfile } from './api';
 
 function GitHubProfile({ username }) {
   const [profile, setProfile] = React.useState(null);
 
   React.useEffect(() => {
-    getGitHubProfile(username).then(setProfile);
+    const unsubscribe = subscribeGitHubProfile(username, (profile) => {
+      setProfile(profile);
+    });
+
+    return () => {
+      unsubscribe(); // dipanggil tepat sebelum memanggil efek baru di fase re-render
+      setProfile(null); // dipanggil tepat sebelum komponen dihapus dari DOM
+    };
   }, [username]);
 
   if (profile === null) {
     return <p>loading ...</p>;
   }
 
-  const { login, bio } = profile;
+  const { login, avatar_url } = profile;
 
   return (
     <>
-      <h1>{login} </h1>
-      <p>{bio}</p>
+      <img src={avatar_url} alt={login} />
+      <h1>{login}</h1>
+    </>
+  );
+}
+
+function App() {
+  const [username, setUsername] = React.useState('dicodingacademy');
+
+  const usernameChange = ({ target }) => setUsername(target.value);
+
+  return (
+    <>
+      <div>
+        <input
+          type="radio"
+          name="username"
+          value="dicodingacademy"
+          checked={username === 'dicodingacademy'}
+          onChange={usernameChange}
+        />{' '}
+        dicodingacademy
+        <input
+          type="radio"
+          name="username"
+          value="reactjs"
+          checked={username === 'reactjs'}
+          onChange={usernameChange}
+        />{' '}
+        reactjs
+      </div>
+
+      <GitHubProfile username={username} />
     </>
   );
 }
 
 const root = createRoot(document.getElementById('root'));
-root.render(<GitHubProfile username="irwantsiregar" />);
+root.render(<App />);
