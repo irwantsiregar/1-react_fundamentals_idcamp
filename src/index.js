@@ -1,13 +1,31 @@
-const LocaleContext = React.createContext('id');
-const ThemeContext = React.createContext('light');
-const UserContext = React.createContext({ id: 'user-1', name: 'Dicoding' });
+const LocaleContext = React.createContext();
 
-function Content() {
-  const locale = React.useContext(LocaleContext);
-  const theme = React.useContext(ThemeContext);
-  const user = React.useContext(UserContext);
+function App() {
+  const [locale, setLocale] = useState('id');
+
+  const toggleLocale = () => {
+    setLocale((prevLocale) => {
+      return prevLocale === 'id' ? 'en' : 'id';
+    });
+  };
+
+  const contextValue = React.useMemo(() => {
+    return {
+      locale,
+      toggleLocale
+    };
+  }, [locale]);
 
   return (
-    <Article locale={locale} theme={theme} user={user} />
+    <LocaleContext.Provider value={contextValue}>
+      {/* a whole app */}
+      {/* a whole app */}
+    </LocaleContext.Provider>
   );
 }
+
+/* 
+Catatan: Memoization adalah teknik dalam meningkatkan performa aplikasi dengan cara
+mempertahankan nilai--beserta referensi memorinya--yang "mahal" didapatkan 
+untuk digunakan kembali ketika dibutuhkan.
+*/
