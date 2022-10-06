@@ -1,28 +1,31 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 
-function Counter() {
-  const [count, setCount] = React.useState(0);
+async function getGitHubProfile(username) {
+  const response = await fetch(`https://api.github.com/users/${username}`);
+  return response.json();
+}
 
-  // menggantikan componentDidMount dan componentDidUpdate
+function GitHubProfile({ username }) {
+  const [profile, setProfile] = React.useState(null);
+
   React.useEffect(() => {
-    console.count('di dalam useEffect');
-    document.title = `You have clicked ${count}x`;
-  });
+    getGitHubProfile(username).then(setProfile);
+  }, [username]);
 
-  const increase = () => setCount((prevCount) => prevCount + 1);
-  const decrease = () => setCount((prevCount) => prevCount - 1);
+  if (profile === null) {
+    return <p>loading ...</p>;
+  }
 
-  console.count('rendering');
+  const { login, bio } = profile;
 
   return (
     <>
-      <button onClick={increase}>increase</button>
-      <p>Count: {count}</p>
-      <button onClick={decrease}>decrease</button>
+      <h1>{login} </h1>
+      <p>{bio}</p>
     </>
   );
 }
 
 const root = createRoot(document.getElementById('root'));
-root.render(<Counter />);
+root.render(<GitHubProfile username="irwantsiregar" />);
