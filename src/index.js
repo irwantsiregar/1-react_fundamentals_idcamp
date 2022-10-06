@@ -1,62 +1,21 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
-import { subscribeGitHubProfile } from './api';
+import AnimalFactCard from './components/AnimalFactCard';
 
-function GitHubProfile({ username }) {
-  const [profile, setProfile] = React.useState(null);
-
-  React.useEffect(() => {
-    const unsubscribe = subscribeGitHubProfile(username, (profile) => {
-      setProfile(profile);
-    });
-
-    return () => {
-      unsubscribe(); // dipanggil tepat sebelum memanggil efek baru di fase re-render
-      setProfile(null); // dipanggil tepat sebelum komponen dihapus dari DOM
-    };
-  }, [username]);
-
-  if (profile === null) {
-    return <p>loading ...</p>;
-  }
-
-  const { login, avatar_url } = profile;
-
-  return (
-    <>
-      <img src={avatar_url} alt={login} />
-      <h1>{login}</h1>
-    </>
-  );
-}
+import './styles/style.css';
 
 function App() {
-  const [username, setUsername] = React.useState('dicodingacademy');
+  const [animal, setAnimal] = React.useState('cat');
 
-  const usernameChange = ({ target }) => setUsername(target.value);
+  const genderChangeHandler = (event) => setAnimal(event.target.value);
 
   return (
     <>
-      <div>
-        <input
-          type="radio"
-          name="username"
-          value="dicodingacademy"
-          checked={username === 'dicodingacademy'}
-          onChange={usernameChange}
-        />{' '}
-        dicodingacademy
-        <input
-          type="radio"
-          name="username"
-          value="reactjs"
-          checked={username === 'reactjs'}
-          onChange={usernameChange}
-        />{' '}
-        reactjs
-      </div>
-
-      <GitHubProfile username={username} />
+      <select onChange={genderChangeHandler}>
+        <option value="cat">Cat Fact</option>
+        <option value="dog">Dog Fact</option>
+      </select>
+      <AnimalFactCard animal={animal} />
     </>
   );
 }
