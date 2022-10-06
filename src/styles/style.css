@@ -1,31 +1,31 @@
 h1 {
-  font - family: sans - serif;
-  margin - bottom: 8px;
+  font-family: sans - serif;
+  margin-bottom: 8px;
 }
 
 .on,
 .off {
   display: flex;
-  align - items: center;
+  align-items: center;
   padding: 16px;
-  border - radius: 8px;
+  border-radius: 8px;
   transition: background - color ease -in -out 0.3s;
 }
 
 .off {
-  background - color: black;
+  background-color: black;
 }
 
 .on {
-  background - color: rgb(185, 185, 139);
+  background-color: rgb(185, 185, 139);
 }
 
 .on > button,
 .off > button {
   padding: 8px;
-  background - color: transparent;
+  background-color: transparent;
   border: 0;
-  font - size: 32px;
+  font-size: 32px;
   cursor: pointer;
 }
 

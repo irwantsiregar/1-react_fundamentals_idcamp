@@ -9,9 +9,42 @@ import React from 'react';
  */
 
 function Todo() {
+  const [todos, setTodos] = React.useState([]);
+  const [input, setInput] = React.useState('');
+
+  const addTodoHandler = () => {
+    setTodos((prevTodos) => {
+      return [...prevTodos, { id: +new Date(), name: input }];
+    });
+
+    // menghapus nilai di dalam input setelah To-do dimasukkan
+    setInput('');
+  };
+
+  const removeTodoHandler = (id) => {
+    setTodos((prevTodos) => {
+      return prevTodos.filter((todo) => todo.id !== id);
+    });
+  };
+
+  const inputChangeHandler = (event) => {
+    setInput(event.target.value);
+  };
+
   return (
     <div>
-      <p>Lihat instruksi pada komponen ini</p>
+      <div>
+        <input value={input} onChange={inputChangeHandler} />
+        <button onClick={addTodoHandler}>Add to-do</button>
+      </div>
+      <ul>
+        {todos.map((todo) => (
+          <li key={todo.id}>
+            {todo.name}
+            <button onClick={() => removeTodoHandler(todo.id)}>X</button>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }

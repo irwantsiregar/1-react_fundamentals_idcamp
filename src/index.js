@@ -1,7 +1,7 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import Todo from './components/Todo';
-import ToggleLamp from './components/ToggleLamp';
+import ToggleLampFunc from './components/ToggleLamp';
 
 import './styles/style.css';
 
@@ -16,7 +16,7 @@ function App() {
           Kasus 1: <code>ToggleLamp</code> Component
         </h2>
         <p>Nyalakan lampu untuk melihat pesan.</p>
-        <ToggleLamp />
+        <ToggleLampFunc />
       </section>
       <section>
         <h2>
