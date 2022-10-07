@@ -1,20 +1,8 @@
 import React from 'react';
-import { getMovies } from '../utils/api';
+import useMovies from '../hooks/useMovies';
 
 function MoviesList() {
-  const [loading, setLoading] = React.useState(true);
-  const [movies, setMovies] = React.useState([]);
-
-  React.useEffect(() => {
-    getMovies().then((movies) => {
-      setMovies(movies);
-      setLoading(false);
-    });
-
-    return () => {
-      setLoading(true);
-    };
-  }, []);
+  const [movies, loading] = useMovies();
 
   if (loading) {
     return (
