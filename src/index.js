@@ -1,61 +1,39 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import Navigation from './components/Navigation';
-import LocaleContext from './contexts/LocaleContext';
-import Community from './pages/Community';
-import Home from './pages/Home';
-import Tutorial from './pages/Tutorial';
+import MoviesGrid from './components/MoviesGrid';
+import MoviesList from './components/MoviesList';
 
 import './styles/style.css';
 
 /**
- * @todos
- * 1. Buatlah fitur ubah bahasa dengan memanfaatkan Context.
- * 2. Pastikan Anda menggunakan fitur Hooks dalam memanfaatkan Context.
+ * @notes
+ * Aplikasi sudah berjalan dengan baik, tetapi masih terdapat
+ * duplikasi logika dalam menampilkan data film
+ * di komponen MoviesList dan MoviesGrid
  *
- * Catatan:
- *  - Manfaatkan tombol yang berada di pojok kanan navigasi untuk mengubah bahasa.
- *  - Seluruh konten yang ditampilkan diambil dari utils -> content.js
+ * @todos
+ * Hapus duplikasi logika pada komponen MoviesList dan MoviesGrid
+ * dengan membuat custom hooks.
  */
 
 function App() {
-  const [locale, setLocale] = React.useState('id');
+  const [mode, setMode] = React.useState('list');
 
-  const toggleLocale = () => {
-    setLocale((prevLocale) => {
-      return prevLocale === 'id' ? 'en' : 'id';
-    });
-  }
-
-  const localeContextValue = React.useMemo(() => {
-    return {
-      locale,
-      toggleLocale
-    }
-  }, [locale]);
+  const modeChangeHandler = (event) => {
+    setMode(event.target.value);
+  };
 
   return (
-    <>
-      <LocaleContext.Provider value={localeContextValue}>
-        <header>
-          <Navigation />
-        </header>
-        <main>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/tutorial" element={<Tutorial />} />
-            <Route path="/community" element={<Community />} />
-          </Routes>
-        </main>
-      </LocaleContext.Provider>
-    </>
+    <main>
+      <select onChange={modeChangeHandler}>
+        <option value="list">List Mode</option>
+        <option value="grid">Grid Mode</option>
+      </select>
+
+      {mode === 'list' ? <MoviesList /> : <MoviesGrid />}
+    </main>
   );
 }
 
 const root = createRoot(document.getElementById('root'));
-root.render(
-  <BrowserRouter>
-    <App />
-  </BrowserRouter>
-);
+root.render(<App />);
