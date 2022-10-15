@@ -1,70 +1,106 @@
-# Getting Started with Create React App
+# Submission 1: Membangun Single Page Application dengan React
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Kriteria
+Buatlah Single Page Application menggunakan React dengan kriteria berikut ini.
 
-## Available Scripts
+Kriteria Utama 1: Minimal terdapat 2 halaman yang berbeda
+Berikut detail dari kriterianya.
 
-In the project directory, you can run:
+Halaman 1: menampilkan daftar catatan.
+Halaman 2: menampilkan detail catatan atau catatan secara tunggal.
 
-### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Kriteria Utama 2: Daftar catatan
+Berikut detail dari kriterianya.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Menampilkan daftar catatan dengan data awal (initial data) yang kami sediakan.
+Data yang ditampilkan pada daftar catatan adalah
+judul catatan (title),
+waktu pembuatan (createdAt), dan
+isi catatan (body).
+Terdapat conditional rendering di mana bila tidak terdapat data catatan, UI menampilkan pesan “Tidak ada catatan” atau pesan apa pun yang mengindikasikan data catatan kosong.
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Kriteria Utama 3: Detail catatan
+Berikut detail dari kriterianya.
 
-### `npm run build`
+Menampilkan catatan tunggal yang dipilih pengguna dari daftar catatan aktif atau diarsipkan.
+Menggunakan id catatan sebagai path parameter dalam menampilkan halaman detail catatan.
+Catatan yang tampil harus sesuai dengan id yang terdapat pada path parameter.
+Halaman Detil Catatan harus dapat diakses langsung dengan menggunakan URL.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Kriteria Utama 4: Menambahkan catatan baru
+Aplikasi mampu menambahkan catatan baru dengan kriteria berikut.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Memanfaatkan controlled component dalam membuat form input.
+Data catatan disimpan cukup pada memori saja (akan hilang jika browser di-refresh). Kami sarankan untuk memanfaatkan fungsi menyimpan catatan yang disediakan.
+Data catatan yang disimpan merupakan objek JavaScript dengan struktur berikut:
+```json
+{
+  id: string,
+  title: string,
+  body: string,
+  archived: boolean, 
+  createdAt: string,
+}
+```
+Berikut contoh data riilnya:
+```json
+{
+  id: 'notes-1',
+  title: "Babel",
+  body: "Babel merupakan tools open-source yang digunakan untuk mengubah sintaks ECMAScript 2015+ menjadi sintaks yang didukung oleh JavaScript engine versi lama. Babel sering dipakai ketika kita menggunakan sintaks terbaru termasuk sintaks JSX.",
+  archived: false,
+  createdAt: '2022-04-14T04:27:34.572Z'
+}
+```
+Catatan tambahan
+Properti id pada tiap catatan yang disimpan haruslah unik. Tips dalam menetapkan nilai untuk adalah Anda bisa memanfaatkan nilai timestamp. Untuk mendapatkan nilai timestamp di JavaScript cukup mudah, cukup dengan menuliskan expressions +new Date().
+Fungsi tambah catatan bisa ditampilkan pada halaman terpisah. Contohnya, pada URL /notes/new.
 
-### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Kriteria Utama 5: Menghapus catatan
+Aplikasi mampu menghapus catatan yang tersimpan. Berikut detailnya.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Aplikasi harus menyediakan tombol hapus untuk menghapus data catatan yang disimpan.
+Tombol hapus boleh diletakkan di mana saja, tetapi pastikan pengguna dapat mengaksesnya dengan baik. Sebagai contoh, Anda bisa menampilkan pada halaman detail catatan dan/atau daftar catatan.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Kriteria Utama 6: Memvalidasi properti
+Berikut detail dari kriterianya.
 
-## Learn More
+Memvalidasi seluruh masukkan (props) yang diterima komponen menggunakan PropTypes.
+Sebelum mengirimkan submission, pastikan tidak ada warning terkait validasi komponen.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Selain kriteria utama, terdapat kriteria opsional yang yang dapat Anda penuhi agar mendapat nilai yang lebih tinggi.
 
-### Code Splitting
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+Kriteria Opsional 1: Arsip Catatan
+Berikut detail dari kriterianya.
 
-### Analyzing the Bundle Size
+- Catatan terarsip adalah catatan yang properti archived bernilai true.
+- Menyediakan halaman baru untuk menampilkan daftar catatan yang terarsip.
+  - Data yang ditampilkan pada daftar catatan adalah
+    - judul catatan (title),
+    - waktu pembuatan (createdAt), dan
+    - isi catatan (body).
+  - Terdapat conditional rendering di mana bila tidak terdapat data catatan, maka UI menampilkan pesan “Arsip kosong” atau pesan apa pun yang mengindikasikan data catatan terarsip kosong.
+- Mengarsipkan catatan.
+- Aplikasi harus menyediakan tombol arsip dan batal arsip untuk mengarsipkan dan memindahkan catatan dari arsip.
+- Tombol arsip dan batal arsip bisa diletakkan di mana saja, tetapi pastikan pengguna dapat mengaksesnya dengan baik. Sebagai contoh, Anda bisa menampilkan pada halaman detail catatan dan/atau daftar catatan.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
 
-### Making a Progressive Web App
+Kriteria Opsional 2: Pencarian catatan
+Berikut detail dari kriterianya.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+Aplikasi memiliki fitur pencarian catatan berdasarkan kata kunci yang dimasukkan, dengan ketentuan:
+Jika kolom pencarian tidak kosong, maka aplikasi hanya menampilkan daftar catatan yang judulnya mengandung kata kunci yang dimasukkan.
+Jika kolom pencariannya kosong, maka aplikasi menampilkan seluruh catatan.
+Memanfaatkan search parameter agar pencarian bersifat shareable melalui URL.
+Memanfaatkan controlled component dalam membangun input pencarian.
 
-### Advanced Configuration
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Kriteria Opsional 3: 404 Pages
+Aplikasi menyediakan halaman khusus bila pengguna mengakses URL aplikasi dengan alamat yang tidak diketahui/diharapkan.
