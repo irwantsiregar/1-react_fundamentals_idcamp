@@ -1,6 +1,6 @@
 # Submission 1: Membangun Single Page Application dengan React
 
-## Kriteria
+Kriteria
 Buatlah Single Page Application menggunakan React dengan kriteria berikut ini.
 
 Kriteria Utama 1: Minimal terdapat 2 halaman yang berbeda
@@ -54,7 +54,6 @@ Berikut contoh data riilnya:
   archived: false,
   createdAt: '2022-04-14T04:27:34.572Z'
 }
-```
 Catatan tambahan
 Properti id pada tiap catatan yang disimpan haruslah unik. Tips dalam menetapkan nilai untuk adalah Anda bisa memanfaatkan nilai timestamp. Untuk mendapatkan nilai timestamp di JavaScript cukup mudah, cukup dengan menuliskan expressions +new Date().
 Fungsi tambah catatan bisa ditampilkan pada halaman terpisah. Contohnya, pada URL /notes/new.
@@ -77,19 +76,20 @@ Sebelum mengirimkan submission, pastikan tidak ada warning terkait validasi komp
 Selain kriteria utama, terdapat kriteria opsional yang yang dapat Anda penuhi agar mendapat nilai yang lebih tinggi.
 
 
+
 Kriteria Opsional 1: Arsip Catatan
 Berikut detail dari kriterianya.
 
-- Catatan terarsip adalah catatan yang properti archived bernilai true.
-- Menyediakan halaman baru untuk menampilkan daftar catatan yang terarsip.
-  - Data yang ditampilkan pada daftar catatan adalah
-    - judul catatan (title),
-    - waktu pembuatan (createdAt), dan
-    - isi catatan (body).
-  - Terdapat conditional rendering di mana bila tidak terdapat data catatan, maka UI menampilkan pesan “Arsip kosong” atau pesan apa pun yang mengindikasikan data catatan terarsip kosong.
-- Mengarsipkan catatan.
-- Aplikasi harus menyediakan tombol arsip dan batal arsip untuk mengarsipkan dan memindahkan catatan dari arsip.
-- Tombol arsip dan batal arsip bisa diletakkan di mana saja, tetapi pastikan pengguna dapat mengaksesnya dengan baik. Sebagai contoh, Anda bisa menampilkan pada halaman detail catatan dan/atau daftar catatan.
+Catatan terarsip adalah catatan yang properti archived bernilai true.
+Menyediakan halaman baru untuk menampilkan daftar catatan yang terarsip.
+Data yang ditampilkan pada daftar catatan adalah
+judul catatan (title),
+waktu pembuatan (createdAt), dan
+isi catatan (body).
+Terdapat conditional rendering di mana bila tidak terdapat data catatan, maka UI menampilkan pesan “Arsip kosong” atau pesan apa pun yang mengindikasikan data catatan terarsip kosong.
+Mengarsipkan catatan.
+Aplikasi harus menyediakan tombol arsip dan batal arsip untuk mengarsipkan dan memindahkan catatan dari arsip.
+Tombol arsip dan batal arsip bisa diletakkan di mana saja, tetapi pastikan pengguna dapat mengaksesnya dengan baik. Sebagai contoh, Anda bisa menampilkan pada halaman detail catatan dan/atau daftar catatan.
 
 
 Kriteria Opsional 2: Pencarian catatan
