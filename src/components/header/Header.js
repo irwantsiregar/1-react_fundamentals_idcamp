@@ -1,26 +1,14 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Brand from './Brand';
 import Hamburger from './Hamburger';
 import NavMenu from './NavMenu';
 
-function Header() {
+function Header({ logout, name }) {
   function hamburgerClick() {
     // Hamburger
     document.querySelector('#hamburger').classList.toggle('hamburger-active');
     document.querySelector('#nav-menu').classList.toggle('hidden');
-  }
-
-  function darkToggleClick() {
-    // Darkmode Toggle
-    const darkToggle = document.querySelector('#dark-toggle');
-    const html = document.querySelector('html');
-    if (darkToggle.checked) {
-      html.classList.add('dark');
-      localStorage.theme = 'dark';
-    } else {
-      html.classList.remove('dark');
-      localStorage.theme = 'light';
-    }
   }
 
   return (
@@ -30,7 +18,7 @@ function Header() {
           <Brand />
           <div className="flex items-center px-4">
             <Hamburger hamburger={hamburgerClick} />
-            <NavMenu dark={darkToggleClick} />
+            <NavMenu logout={logout} name={name} />
           </div>
         </div>
       </div>
@@ -38,4 +26,8 @@ function Header() {
   )
 }
 
+Header.propTypes = {
+  logout: PropTypes.func.isRequired,
+  name: PropTypes.string.isRequired
+}
 export default Header;

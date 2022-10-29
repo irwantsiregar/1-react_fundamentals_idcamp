@@ -5,7 +5,7 @@ import Button from './Button';
 import parser from 'html-react-parser';
 import PropTypes from 'prop-types';
 
-function NoteItemBody({ title, body, createdAt, archived, id, onClick, onArchive }) {
+function NoteItemBody({ title, body, createdAt, archived, id, onDelete, onArchive }) {
   return (
     <div className="bg-white rounded-xl shadow-lg overflow-hidden mb-10 dark:bg-slate-700">
       <div className="py-8 px-6">
@@ -17,7 +17,7 @@ function NoteItemBody({ title, body, createdAt, archived, id, onClick, onArchive
         {
           !archived ?
             <div className="flex justify-end pr-4">
-              <Button className="rounded-lg py-2 outline outline-none outline-1 hover:outline-red-600" id={id} onClick={onClick}><FiTrash className="text-red-600 text-xl mx-3 hover:opacity-70" /></Button>
+              <Button className="rounded-lg py-2 outline outline-none outline-1 hover:outline-red-600" id={id} onClick={onDelete}><FiTrash className="text-red-600 text-xl mx-3 hover:opacity-70" /></Button>
               <Button className="rounded-lg py-2 outline outline-none outline-1 hover:outline-primary" id={id} onClick={onArchive}><FiArchive className="text-primary text-xl mx-3 hover:opacity-70" /></Button>
             </div>
             :
@@ -36,7 +36,7 @@ NoteItemBody.propTypes = {
   createdAt: PropTypes.string.isRequired,
   archived: PropTypes.bool.isRequired,
   id: PropTypes.string.isRequired,
-  onClick: PropTypes.func.isRequired,
+  onDelete: PropTypes.func.isRequired,
   onArchive: PropTypes.func.isRequired
 };
 

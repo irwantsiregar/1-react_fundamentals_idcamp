@@ -32,3 +32,15 @@ body {
 #dark-toggle:checked ~ label div.toggle-circle {
   @apply translate-x-3;
 }
+
+/* css added sub-2 */
+.warning-input {
+  display: none;
+}
+
+[contenteditable=true]:empty:before {
+  color: rgb(203 213 225);
+  content: attr(placeholder);
+  pointer-events: none;
+  display: block; 
+}

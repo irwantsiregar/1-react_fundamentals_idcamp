@@ -1,26 +1,29 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import HomePageWrapper from '../../pages/HomePage';
 import ArchivePageWrapper from '../../pages/ArchivePage';
 import AddPage from '../../pages/AddPage';
-import EditPage from '../../pages/EditPage';
-import DetailPageWrapper from '../../pages/DetailPage';
+import DetailPage from '../../pages/DetailPage';
 import PageNotFound from '../../pages/PageNotFound';
 
-function Main() {
+function Main({ hamburger }) {
   return (
-    <main className="min-h-[82vh] md:min-h-[90vh] bg-slate-100 dark:bg-dark">
+    <main onClick={hamburger} className="min-h-[82vh] md:min-h-[90vh] bg-slate-100 dark:bg-dark">
       <Routes>
         <Route path="/" element={<HomePageWrapper />} />
         <Route path="/archived" element={<ArchivePageWrapper />} />
         <Route path="/notes/new" element={<AddPage />} />
-        <Route path="/notes/edit/:id" element={<EditPage />} />
-        <Route path="/notes/:id" element={<DetailPageWrapper />} />
-        <Route path="*" element={<PageNotFound />} />
+        <Route path="/notes/:id" element={<DetailPage />} />
+        <Route path="/*" element={<PageNotFound />} />
       </Routes>
     </main>
   )
 }
+
+Main.propTypes = {
+  hamburger: PropTypes.func.isRequired,
+};
 
 
 export default Main;

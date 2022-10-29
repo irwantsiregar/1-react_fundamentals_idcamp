@@ -1,0 +1,40 @@
+import React from 'react';
+import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
+import LoginInput from '../components/userInput/LoginInput';
+import { login } from '../utils/network-data';
+
+function LoginPage({ loginSuccess }) {
+  async function onLogin({ email, password }) {
+    const { error, data } = await login({ email, password });
+
+    if (error) {
+      return data;
+    }
+    loginSuccess(data);
+  }
+
+  return (
+    <section className="w-full h-screen bg-slate-100">
+      <div className="container h-full flex items-center">
+        <div data-aos="fade-down" className="w-full md:w-3/4 lg:w-1/2 md:mx-auto bg-white rounded-lg shadow-xl py-6 px-2 md:-mt-48 md:px-20 md:py-14">
+          <div className="ml-4 mb-6">
+            <h2 className="text-3xl lg:text-4xl text-slate-600 font-semibold">Sign In</h2>
+          </div>
+          <div className="w-full mb-6">
+            <LoginInput login={onLogin} />
+          </div>
+          <div className="w-full flex justify-center mb-4">
+            <Link to="/register" className="block text-base md:text-[18px] text-center w-3/4 md:w-64 lg:w-80 font-semibold text-slate-500 bg-slate-100 shadow-xl py-3 px-8 rounded-full hover:opacity-80 hover:shadow-lg transition duration-500">Create New Account</Link>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+LoginPage.propTypes = {
+  loginSuccess: PropTypes.func.isRequired,
+}
+
+export default LoginPage;

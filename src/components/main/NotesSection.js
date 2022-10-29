@@ -3,8 +3,9 @@ import PropTypes from 'prop-types';
 import SearchInput from './SearchInput';
 import NoteList from './NoteList';
 import TitleSectionPage from './TitleSectionPage';
+import { Loadings } from './Loading';
 
-function NotesSection({ label, notes, onClick, onArchive, keyword, keywordChange, message }) {
+function NotesSection({ label, loading, notes, onDelete, onArchive, keyword, keywordChange, message }) {
   return (
     <section id="notes" className="pb-14 md:pb-24">
       <div className="container pt-14">
@@ -12,7 +13,11 @@ function NotesSection({ label, notes, onClick, onArchive, keyword, keywordChange
           <SearchInput keyword={keyword} keywordChange={keywordChange} />
           <div className="w-full">
             <TitleSectionPage label={label} />
-            <NoteList notes={notes} onClick={onClick} onArchive={onArchive} message={message} />
+            {
+              loading ?
+                <Loadings /> :
+                <NoteList notes={notes} onDelete={onDelete} onArchive={onArchive} message={message} />
+            }
           </div>
         </div>
       </div>
@@ -23,7 +28,8 @@ function NotesSection({ label, notes, onClick, onArchive, keyword, keywordChange
 NotesSection.propTypes = {
   label: PropTypes.string,
   notes: PropTypes.array,
-  onClick: PropTypes.func.isRequired,
+  loading: PropTypes.bool.isRequired,
+  onDelete: PropTypes.func.isRequired,
   onArchive: PropTypes.func.isRequired,
   keyword: PropTypes.string,
   keywordChange: PropTypes.func,

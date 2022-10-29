@@ -3,16 +3,15 @@ import NoteItem from './NoteItem';
 import PropTypes from 'prop-types';
 import Announcement from './Announcement';
 
-function NoteList({ notes, onClick, onArchive, message }) {
+function NoteList({ notes, onDelete, onArchive, message }) {
   return (
     <div className="flex flex-wrap">
       {
-
         notes.length ? notes.map((note) =>
           <NoteItem
             key={note.id}
             note={note}
-            onClick={onClick}
+            onDelete={onDelete}
             onArchive={onArchive}
           />
         ) :
@@ -25,7 +24,7 @@ function NoteList({ notes, onClick, onArchive, message }) {
 NoteList.propTypes = {
   notes: PropTypes.array,
   message: PropTypes.string,
-  onClick: PropTypes.func.isRequired,
+  onDelete: PropTypes.func.isRequired,
   onArchive: PropTypes.func.isRequired
 };
 
