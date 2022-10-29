@@ -1,8 +1,8 @@
 import React from 'react';
-import { addNote } from '../utils/network-data';
-import FormSection from '../components/main/FormSection';
 import { useNavigate } from 'react-router-dom';
+import { addNote } from '../utils/network-data';
 import Swal from 'sweetalert2';
+import FormSection from '../components/main/FormSection';
 
 function AddPage() {
   const navigate = useNavigate();

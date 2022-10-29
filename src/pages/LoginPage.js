@@ -15,7 +15,7 @@ function LoginPage({ loginSuccess }) {
   }
 
   return (
-    <section className="w-full h-screen bg-slate-100">
+    <section className="w-full h-screen p-2 bg-slate-100">
       <div className="container h-full flex items-center">
         <div data-aos="fade-down" className="w-full md:w-3/4 lg:w-1/2 md:mx-auto bg-white rounded-lg shadow-xl py-6 px-2 md:-mt-48 md:px-20 md:py-14">
           <div className="ml-4 mb-6">
